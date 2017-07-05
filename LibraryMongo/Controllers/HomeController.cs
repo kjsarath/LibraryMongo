@@ -22,7 +22,7 @@ namespace LibraryMongo.Controllers
 
         public ActionResult Index()
         {
-            return View("Index", Context.GetAllUsers());
+            return View("Index", Context.GetAllUsers().ToList());
         }
         public ActionResult Add()
         {
