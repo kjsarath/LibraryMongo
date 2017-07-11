@@ -49,7 +49,7 @@ namespace LibraryMongo.Controllers
         {
             if (user == null) return RedirectToAction("Index");
 
-            Context.Update(user.Id, user);
+            Context.Update(user.userid, user);
 
             return RedirectToAction("Index");
         }

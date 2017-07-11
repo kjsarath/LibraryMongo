@@ -9,11 +9,12 @@ namespace LibraryMongo.Models
     public class User
     {
         [BsonId]
-        public string Id { get; set; }
-        public string UserName { get; set; }
-        public string DisplayName { get; set; }
-        public string Password { get; set; }
-        public string Category { get; set; }
-        public DateTime MDate { get; set; }
+        public MongoDB.Bson.ObjectId  _id { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string displayname { get; set; }
+        public Boolean  active { get; set; }
+        public string role { get; set; }
+        public string userid { get; set; }
     }
 }

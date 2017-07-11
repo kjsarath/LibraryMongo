@@ -1,0 +1,71 @@
+﻿@model LibraryMongo.Models.User 
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_newLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    <br />
+    <table align="center">
+        <tr>
+            <td>
+                <div class="panel panel-info  " style="width:45%;min-width:400px;align-content:center ;align-self:center;align-items:center; ">
+                    <div class="panel-heading text-center"><h4>Enter your credentails</h4></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:30%;vertical-align:central  ">
+                                        <label style="width:100%">USERNAME</label>
+                                    </td>
+                                    <td style="width:70%;vertical-align:central ">
+                                        @*<input type="email" class="input-group input-group-lg form-control" id="inputEmail3" placeholder="Username">*@
+                                        @Html.TextBoxFor(m=>m.username,new { @class= "form-control", @placeholder = "Username", @type = "email" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:30%;vertical-align:central ">
+                                        <label style="width:100%">PASSWORD</label>
+                                    </td>
+                                    <td style="width:70%;vertical-align:central ">
+                                        @*<input type="password" class="form-control" id="inputPassword3" placeholder="Password">*@
+                                        @Html.TextBoxFor(m => m.password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3  col-md-offset-3  col-sm-9 col-md-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Remember me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3  col-md-offset-3  col-sm-9 col-md-9">
+                                <button type="submit" class="btn btn-info" value="LogIn">Sign In</button> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+}
+@if (@ViewBag.Message != null)
+{
+    <ul>
+        <li>
+            @ViewBag.Message
+        </li>
+    </ul>
+
+}
