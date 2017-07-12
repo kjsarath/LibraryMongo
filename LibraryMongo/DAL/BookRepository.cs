@@ -20,7 +20,7 @@ namespace LibraryMongo.DAL
 
         }
         private List<Books> booksList = new List<Books>();
-        public IEnumerable<Books> getAllBooks()
+        public List<Books> getAllBooks()
         {
             if (serverDown) return null;
             if (Convert.ToInt32(books.Count(FilterDefinition<Books>.Empty)) > 0)
@@ -39,7 +39,7 @@ namespace LibraryMongo.DAL
             {
                 return null;
             }
-            var result = booksList.AsQueryable();
+            var result = booksList;
             return result;
         }
         public Books add(Books book)

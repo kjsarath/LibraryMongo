@@ -1,0 +1,49 @@
+﻿@model List<LibraryMongo.Models.Books>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Books", null, FormMethod.Post))
+{
+    <br />
+    <table align="center"  style="width:100%;">
+        <tr>
+            <td>
+                <div class="panel panel-info" style="width:100%;align-content:center ;align-self:center;align-items:center; ">
+                    <div class="panel-heading text-right "><h5>BOOKS - LIST</h5></div>
+                    <div class="panel-body">
+                        <div class="form-group col-md-12">
+                            <div style="text-align: left">
+                                <input type="submit" name="action:Add" value="Add New Book" class="btn btn-info" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12 " >
+                            <input type="text" id="txtSearch" placeholder="Type here to search with book code or title" class="form-control " style="width:100%" onkeyup="Search()"/>
+                        </div>
+                        <div class="col-md-12" id="divPartial">
+                            @Html.Partial("~/Views/Books/BooksList.cshtml", Model)
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        function Search()
+        {
+            var txt = $("#txtSearch").val();
+            $.ajax({
+                type: "POST",
+                url: "/Books/SearchBook",
+                data: { searchText: txt },
+                datatype: "html",
+                success:function(data)
+                {
+                    $("#divPartial").html(data);
+                }
+                })
+        }
+    </script>
+}
+

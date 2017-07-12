@@ -1,0 +1,105 @@
+﻿.tdStyle {
+    width: 150px;
+    border: solid 1px #ffffff;
+    background-color:#cccccc;
+    /*#ABDCD6;*/
+		/*#BCC6CC;*/
+    color: Black;
+    font-size: 13px;
+    text-align: left;
+    height: 20px;
+    padding: 5px;
+    margin-left: 5px;
+    
+}
+.tdStyle2 {
+    border: solid 1px #ffffff;
+    background-color:#dedede;
+    color: Black;
+    font-size: 13px;
+    text-align: left;
+    height: 20px;
+    padding: 5px;
+    margin-left: 5px;
+    /*min-width:100px;*/
+}
+.TextBoxTDBG {
+    background-color: #dedede;
+    text-align: left;
+    font-family: Consolas,Verdana ;
+    font-size: 10px;
+    height: 24px;
+	margin-left: 40px;
+	border: solid 1px #ffffff;
+	padding-left:5px;
+	padding-right:5px;
+}
+.TextBoxTDBG2 {
+    background-color:#f2f2f2;
+     /*#dedede;*/
+    text-align: left;
+    font-family: Consolas,Verdana ;
+    font-size: 12px;
+    height: 24px;
+	margin-left: 40px;
+	border: solid 1px #ffffff;
+	padding-left:5px;
+	padding-right:5px;
+    font-weight:bold ;
+}
+.TextBoxTDBG3 {
+    background-color:#ffffff;
+     /*#dedede;*/
+    text-align: left;
+    font-family: Consolas,Verdana ;
+    font-size: 12px;
+    height: 24px;
+	/*margin-left: 40px;*/
+	border: solid 1px #ffffff;
+	padding-left:5px;
+	padding-right:5px;
+    font-weight:bold ;
+    width:100%;
+}
+.TextBoxTDBG4 {
+    background-color:#ffffff;
+     /*#dedede;*/
+    text-align: left;
+    font-family: Consolas,Verdana ;
+    font-size: 12px;
+    height: 24px;
+	border: solid 1px #269abc;
+    font-weight:bold ;
+    width:100%;
+    max-width:100%;
+}
+.dxeBase_DevEx {
+    font: 10px Consolas,Verdana, Geneva, sans-serif;
+}
+.SubHead {
+    font-weight: bold;
+    font-size: 13px;
+    color: White;
+    /*background-color:#337ab7;*/
+    background-color: #31b0d5;
+    border-color: #269abc;
+    width: 1000px;
+}
+.SubHead2 {
+    font-weight: bold;
+    font-size: 13px;
+    color: White;
+    background-color: #337ab7;
+    width: 1000px;
+    padding-right: 15px;
+  padding-left: 15px;
+}
+.CTcol-md-4 {
+    position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+  width: 33.33333333%;
+
+}

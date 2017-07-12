@@ -1,0 +1,34 @@
+﻿@model List<LibraryMongo.Models.Books>
+
+<div style="font-family:Calibri ;font-size:12px">
+    @{ 
+        WebGrid grid = new WebGrid(Model, rowsPerPage: 20, canPage: true, canSort: true, ajaxUpdateContainerId: "gridContent");
+        grid.Pager(WebGridPagerModes.NextPrevious);
+        <div id="gridContent">
+            @grid.GetHtml(tableStyle: "table table-bordered table-striped table-condensed",
+                        mode: WebGridPagerModes.All,
+                        firstText: "<< First",
+                        previousText: "< Prev",
+                        nextText: "Next >",
+                        lastText: "Last >>",
+                        headerStyle: "grid-header",
+                        footerStyle: "webgrid-footer",
+                        alternatingRowStyle: "webgrid-alternating-row",
+                        selectedRowStyle: "webgrid-selected-row",
+                        rowStyle: "gridrow",
+                        columns: grid.Columns
+                        (
+                        //grid.Column("Id", format: (item) => item.GetSelectLink(item.Id)),
+                        //grid.Column(null, null, format: @<input type="hidden" name="BookMastID" value="@item.BookMastID" />),//"BookMastID", "BookID"),
+                        grid.Column("Code", "BOOK CODE", style: "description"),
+                        grid.Column("Title", "TITLE", style: "description"),
+                        grid.Column("Isbn", "ISBN"),
+                        grid.Column("DateOfEntry", "DATE OF ENTRY"),
+                        grid.Column("Type", "TYPE"),
+                        //grid.Column("ACTIONS", style: "btn btn-default", format: @<text> @Html.ActionLink("View", "Index", "BooksDetail", new { id = item.BookMastID })</text>)
+                        grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("View", "Detail", new { id = (object)item.BookID }))
+                        )
+                        )
+        </div>
+    }
+</div>

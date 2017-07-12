@@ -1,0 +1,215 @@
+﻿@model LibraryMongo.Models.Books
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/jquery-ui-1.12.1.min.js")
+    @*@Styles.Render("~/Content/cssjqryUi")*@
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/M/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>
+
+}
+@using (Html.BeginForm("Add", "Books", null, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <table align="center" style="width:100%;">
+        <tr>
+            <td>
+                <div class="panel panel-info" style="width:100%;align-content:center ;align-self:center;align-items:center;font-family:Calibri,Tahoma;font-size:16px ">
+                    <div class="panel-heading text-right "><h5>BOOKS - ADD NEW</h5></div>
+                    <div class="panel-body ">
+                        <div class="form-group" style="text-align: left">
+                                <input type="submit" name="action:Save" value="Save" class="btn btn-success " />
+                                <input type="submit" name="action:Back" value="Cancel" class="btn btn-danger" />
+                                <span style="width:50px"></span>
+                                <input type="submit" name="action:Back" value="Back To List" class="btn btn-info" />
+                        </div>
+                        <div style="font-family:Calibri ;font-size:12px">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td colspan="4" Style="text-align: right; font-family: Corbel; font-size: large;">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.BookID)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="SubHead">BOOK DETAILS</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Name</td>
+                                    <td colspan="3" class="TextBoxTDBG3" style="width: 85%">
+                                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%; height: 24px;">Code</td>
+                                    <td style="height: 24px;width: 40%" class="TextBoxTDBG3">
+                                        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td class="tdStyle2" style="width:10%">Type</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span2"></span>
+                                        @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Date of Entry</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span3"></span>
+                                        @*<input class="date-picker" />*@
+                                        @*@Html.TextBoxFor(model=>model.dateofentry, new { htmlAttributes = new { @class = "date-picker" } })*@
+                                        @Html.EditorFor(model => model.DateOfEntry, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.DateOfEntry, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td class="tdStyle2" style="width:10%">ISBN</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span4"></span>
+                                        @Html.EditorFor(model => model.ISBN, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.ISBN, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="SubHead">AUTHOR &amp; PUBLISHER</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Author 1</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span5"></span>
+                                        @Html.EditorFor(model => model.Author1, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Author1, "", new { @class = "text-danger" })
+                                    </td>
+
+                                    <td class="tdStyle2" style="width:10%">Author 2</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span6"></span>
+                                        @Html.EditorFor(model => model.Author2, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Author2, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Publisher</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span7"></span>
+                                        @Html.EditorFor(model => model.Publisher, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Publisher, "", new { @class = "text-danger" })
+                                    </td>
+
+                                    <td class="tdStyle2" style="width:10%">Sub Title</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span8"></span>
+                                        @Html.EditorFor(model => model.SubTitle, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.SubTitle, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="SubHead">OTHER DETAILS</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Series</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span9"></span>
+                                        @Html.EditorFor(model => model.Series, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Series, "", new { @class = "text-danger" })
+                                    </td>
+
+                                    <td class="tdStyle2" style="width:10%">Volume</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span10"></span>
+                                        @Html.EditorFor(model => model.Volume, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Volume, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Subject</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span11"></span>
+                                        @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                                    </td>
+
+                                    <td class="tdStyle2" style="width:10%">Language</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span15"></span>
+                                        @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Category</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span13"></span>
+                                        @Html.EditorFor(model => model.ArticleType, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.ArticleType, "", new { @class = "text-danger" })
+                                    </td>
+
+                                    <td class="tdStyle2" style="width:10%">Sub-Category</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span14"></span>
+                                        @Html.EditorFor(model => model.ArticleCategory, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.ArticleCategory, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Synopsis</td>
+                                    <td class="TextBoxTDBG3" colspan="3" style="width: 85%">
+                                        <span class="dxeBase_DevEx" id="Span18"></span>
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="SubHead">CLASSIFICATION DETAILS</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Call No P1</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span19"></span>
+                                        @Html.EditorFor(model => model.CallNoP1, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.CallNoP1, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td class="tdStyle2" style="width:10%">Pre-Call No</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span21"></span>
+                                        @Html.EditorFor(model => model.CallNoP2, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.CallNoP2, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle2" style="width:10%">Old Call No</td>
+                                    <td class="TextBoxTDBG3" style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span22"></span>
+                                        @Html.EditorFor(model => model.CallNoP3, new { htmlAttributes = new { @class = "TextBoxTDBG4" } })
+                                        @Html.ValidationMessageFor(model => model.CallNoP3, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td style="width:10%"></td>
+                                    <td style="width: 40%">
+                                        <span class="dxeBase_DevEx" id="Span15"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+}
+

@@ -35,7 +35,7 @@ namespace LibraryMongo.Controllers
             {
                 FormsAuthentication.SetAuthCookie(uU.username, true);
                 Session["LoginInfo"] = uU.username;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Books");
             }
             else
             {
