@@ -27,7 +27,7 @@ namespace LibraryMongo.Models
         public string ArticleCategory { get; set; }
         public string Language { get; set; }
         public string Description { get; set; }
-        public DateTime DateOfEntry { get; set; }
+        public DateTime? DateOfEntry { get; set; }
         public string CallNoP1 { get; set; }
         public string CallNoP2 { get; set; }
         public string CallNoP3 { get; set; }

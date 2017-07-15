@@ -56,7 +56,19 @@ namespace LibraryMongo.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                Books b = books.getAllBooks().Where(bk => bk.BookID == BookID).FirstOrDefault();
+                if(TryUpdateModel(b))
+                {
+                    try
+                    {
+                        books.update(b);
+                        return RedirectToAction("Index");
+                    }
+                    catch(RetryLimitExceededException )
+                    {
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                    }
+                }
             }
             return RedirectToAction("Index");
         }
@@ -66,6 +78,20 @@ namespace LibraryMongo.Controllers
         public ActionResult Back()
         {
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(object id)
+        {
+            var bk = books.getAllBooks().Where(b => b.BookID == id.ToString()).FirstOrDefault();
+            return View(bk);
+        }
+
+        [HttpPost]
+        [MultipleButton(Name ="action",Argument ="Edit")]
+        public ActionResult Edit(string id)
+        {
+            var bk = books.getAllBooks().Where(b => b.BookID == id).FirstOrDefault();
+            return View("Add", bk);
         }
     }
 }

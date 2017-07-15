@@ -51,6 +51,37 @@ namespace LibraryMongo.DAL
             books.InsertOne(book);
             return book;
         }
+        public Books update(Books book)
+        {
+            if (string.IsNullOrEmpty(book.BookID))
+            {
+                return add(book);
+            }
+            var updateBuilder = Builders<Books>.Update
+                .Set("ArticleCategory", book.ArticleCategory )
+                .Set("ArticleType", book.ArticleType )
+                .Set("Author1", book.Author1 )
+                .Set("Author2", book.Author2 )
+                .Set("Barcode", book.Barcode )
+                .Set("CallNoP1", book.CallNoP1 )
+                .Set("CallNoP2", book.CallNoP2 )
+                .Set("CallNoP3", book.CallNoP3 )
+                .Set("Category", book.Category )
+                .Set("Code", book.Code )
+                .Set("Copies", book.Copies )
+                .Set("DateOfEntry",(book.DateOfEntry==null? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc) : DateTime.SpecifyKind((DateTime)book.DateOfEntry, DateTimeKind.Utc)  ))
+                .Set("Description", book.Description )
+                .Set("ISBN", book.ISBN )
+                .Set("Language", book.Language )
+                .Set("Publisher", book.Publisher )
+                .Set("Series", book.Series )
+                .Set("SubTitle", book.SubTitle )
+                .Set("Title", book.Title )
+                .Set("Type", book.Type )
+                .Set("Volume", book.Volume );
+            books.UpdateOne(Builders<Books>.Filter.Eq("BookID", book.BookID),updateBuilder);
+            return book;
+        }
         public Copies addCopy(string bookID,Copies copy)
         {
             if (string.IsNullOrEmpty(copy.CopyID))

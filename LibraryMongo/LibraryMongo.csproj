@@ -335,6 +335,7 @@
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Books\BooksList.cshtml" />
     <Content Include="Views\Books\Add.cshtml" />
+    <Content Include="Views\Books\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

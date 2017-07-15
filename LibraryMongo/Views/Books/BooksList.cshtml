@@ -26,7 +26,7 @@
                         grid.Column("DateOfEntry", "DATE OF ENTRY"),
                         grid.Column("Type", "TYPE"),
                         //grid.Column("ACTIONS", style: "btn btn-default", format: @<text> @Html.ActionLink("View", "Index", "BooksDetail", new { id = item.BookMastID })</text>)
-                        grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("View", "Detail", new { id = (object)item.BookID }))
+                        grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("View", "Details", new { id = (object)item.BookID }))
                         )
                         )
         </div>
