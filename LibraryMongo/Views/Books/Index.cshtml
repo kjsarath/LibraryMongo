@@ -14,12 +14,31 @@
                     <div class="panel-heading text-right "><h5>BOOKS - LIST</h5></div>
                     <div class="panel-body">
                         <div class="form-group col-md-12">
+                            <table style="width:100%;font-family: Corbel; font-size: large;">
+                                <tbody>
+                                    <tr style="height:24px">
+                                        <td align="right" style="width: 15%;padding:0px 2px 2px 2px;background-color:#337ab7;text-align:left ">
+                                            <font color="White" family="Calibri" size="4"><b>ISBN Search</b></font>
+                                        </td>
+                                        <td colspan="1" class="TextBoxTDBG2" style="padding-right:1px;width: 70%;">
+                                            <span class="dxeBase_DevEx" id="Span29"></span>
+                                            <input type="text" id="txtISBN" name="txtISBN" style="width:100%" class="form-control TextBoxTDBG4 " />
+                                        </td>
+                                        <td style="width: 15%;text-align:right ">
+                                            <input type="submit" name="action:Search" value="Search" class="btn btn-success " style="width:100%" />
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group col-md-12">
                             <div style="text-align: left">
                                 <input type="submit" name="action:Add" value="Add New Book" class="btn btn-info" />
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12 " >
-                            <input type="text" id="txtSearch" placeholder="Type here to search with book code or title" class="form-control " style="width:100%" onkeyup="Search()"/>
+                            <input type="text" id="txtSearch" placeholder="Type here to search with book code or title" class="form-control TextBoxTDBG4 " style="width:100%" onkeyup="Search()"/>
                         </div>
                         <div class="col-md-12" id="divPartial">
                             @Html.Partial("~/Views/Books/BooksList.cshtml", Model)
