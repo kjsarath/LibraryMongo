@@ -16,6 +16,13 @@ namespace LibraryMongo.DAL
         public bool serverDown=false;
         public UserRepository()
         {
+            //var credential = MongoCredential.CreateMongoCRCredential("admin", "mongoAdmin", "$cR@m$H@1");
+            //var settings = new MongoClientSettings
+            //{
+            //    Credentials = new[] { credential },
+            //    Server = new MongoServerAddress("DEMO",4509)
+            //};
+            //var mClient = new MongoClient(settings);
             var mClient = new MongoClient(Settings.Default.LibraryConnectionString);
             mDb = mClient.GetDatabase("Library");
             users = mDb.GetCollection<User>("Users");
