@@ -1,6 +1,9 @@
 ﻿using LibraryMongo.DAL;
 using LibraryMongo.Models;
 using LibraryMVC.DAL;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -80,7 +83,7 @@ namespace LibraryMongo.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Details(object id)
+        public ActionResult Details(string id)
         {
             var bk = books.getAllBooks().Where(b => b.BookID == id.ToString()).FirstOrDefault();
             return View(bk);
@@ -92,6 +95,42 @@ namespace LibraryMongo.Controllers
         {
             var bk = books.getAllBooks().Where(b => b.BookID == id).FirstOrDefault();
             return View("Add", bk);
+        }
+
+        [HttpPost]
+        [MultipleButton(Name ="action",Argument ="AddCopy")]
+        public ActionResult AddCopy(string id)
+        {
+            Copies cp = new Copies();
+            object  allDocs=null;
+            try
+            {
+                allDocs = ((books.books as IMongoCollection<Books>).Find(FilterDefinition<Books>.Empty).Project(Builders<Books>.Projection.Include("Copies.AccessionNo").Exclude("_id")).Sort(Builders<Books>.Sort.Descending("Copies.AccessionNo")).Limit(1).ToList()[0].ElementAt(0).Value)[0].AsBsonDocument.ElementAt(0).Value;
+                allDocs = int.Parse( allDocs.ToString()) + 1;
+            }
+            catch (System.Exception e) { allDocs = null; }
+            if (allDocs!=null )cp.AccessionNo = allDocs.ToString();
+            return View("AddCopy",cp);
+        }
+
+        [HttpPost]
+        [MultipleButton(Name ="action",Argument ="SaveCopy")]
+        public ActionResult SaveCopy(string id)
+        {
+            Copies cp = new Models.Copies();
+            if(TryUpdateModel(cp))
+            {
+                try
+                {
+                    books.addCopy(id, cp);
+                    return RedirectToAction("Details", new { id = id });
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                }
+            }
+            return RedirectToAction("Details", new { id = id });
         }
     }
 }

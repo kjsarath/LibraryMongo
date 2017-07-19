@@ -188,9 +188,51 @@
                         </div>
                     </div>
                 </div>
+                <br />
+                <div class="panel panel-info" style="width:100%;align-content:center ;align-self:center;align-items:center;">
+                    <div class="panel-heading text-right "><h5>BOOK - COPIES</h5></div>
+                    <div class="panel-body ">
+                        <div class="col-md-12" style="text-align: left">
+                            <input type="submit" name="action:AddCopy" value="Add Copy" class="btn btn-info " />
+                            <br />
+                        </div>
+                        
+                        <div id="divPartial" class="col-md-12" style="font-family:Calibri,Tahoma;font-size:12px " >
+                            @{
+                                if (Model.Copies != null)
+                                {
+                                    WebGrid grid = new WebGrid(source: Model.Copies, rowsPerPage: 10, canPage: true, canSort: true, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "divG");
+                                    grid.Pager(WebGridPagerModes.NextPrevious);
+                                    <div id="divG">
+                                        @grid.GetHtml(
+                                                     tableStyle: "table table-bordered table-striped table-condensed",
+                                                     mode: WebGridPagerModes.All,
+                                                     firstText: "<< First",
+                                                     previousText: "< Prev",
+                                                     nextText: "Next >",
+                                                     lastText: "Last >>",
+                                                     headerStyle: "grid-header",
+                                                     footerStyle: "webgrid-footer",
+                                                     alternatingRowStyle: "webgrid-alternating-row",
+                                                     selectedRowStyle: "webgrid-selected-row",
+                                                     rowStyle: "gridrow",
+                                                     columns: grid.Columns
+                                                     (
+                                                         grid.Column("AccessionNo", "ACESSION NO", style: "description"),
+                                                         grid.Column("SubCode", "SUB CODE"),
+                                                         grid.Column("Status", "STATUS"),
+                                                         grid.Column("IssueStatus", "ISSUE STATUS"),
+                                                         grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("EDIT", "EditCopy", "BookCopy", new { id = (object )item.CopyID }, null))
+                                                     )
+                                                 )
+                                    </div>
+                                    }
+                                }
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>
 }
-<br />
 

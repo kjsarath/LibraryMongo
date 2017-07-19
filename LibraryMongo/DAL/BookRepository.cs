@@ -89,7 +89,7 @@ namespace LibraryMongo.DAL
                 copy.CopyID = Guid.NewGuid().ToString();
             }
             var filter = Builders<Books>.Filter.Eq("BookID",bookID);
-            var update = Builders<Books>.Update.Push("Books.$.Copies", copy);
+            var update = Builders<Books>.Update.Push("Copies", copy);
             books.FindOneAndUpdateAsync(filter, update);
             return copy;
         }

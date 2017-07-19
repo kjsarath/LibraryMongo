@@ -1,0 +1,29 @@
+﻿@model LibraryMongo.Models.Books
+
+@{
+    WebGrid grid = new WebGrid(source: (List<LibraryMongo.Models.Copies>)Model.Copies, rowsPerPage: 10, canPage: true, canSort: true, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "divG");
+        grid.Pager(WebGridPagerModes.NextPrevious);
+        <div id="divG">
+            @grid.GetHtml(
+                tableStyle: "table table-bordered table-striped table-condensed",
+                mode: WebGridPagerModes.All,
+                firstText: "<< First",
+                previousText: "< Prev",
+                nextText: "Next >",
+                lastText: "Last >>",
+                headerStyle: "grid-header",
+                footerStyle: "webgrid-footer",
+                alternatingRowStyle: "webgrid-alternating-row",
+                selectedRowStyle: "webgrid-selected-row",
+                rowStyle: "gridrow",
+                columns: grid.Columns
+                (
+                    grid.Column("AccessionNo", "ACESSION NO", style: "description"),
+                    grid.Column("SubCode", "SUB CODE"),
+                    grid.Column("Status", "STATUS"),
+                    grid.Column("IssueStatus", "ISSUE STATUS"),
+                    grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("EDIT", "EditCopy", "BookCopy", new { id = (int)item.CopyID }, null))
+                )
+            )
+        </div>
+        }
