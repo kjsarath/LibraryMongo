@@ -105,10 +105,14 @@ namespace LibraryMongo.Controllers
             object  allDocs=null;
             try
             {
-                allDocs = ((books.books as IMongoCollection<Books>).Find(FilterDefinition<Books>.Empty).Project(Builders<Books>.Projection.Include("Copies.AccessionNo").Exclude("_id")).Sort(Builders<Books>.Sort.Descending("Copies.AccessionNo")).Limit(1).ToList()[0].ElementAt(0).Value)[0].AsBsonDocument.ElementAt(0).Value;
+                //allDocs = ((books.books as IMongoCollection<Books>).Find(FilterDefinition<Books>.Empty).Project(Builders<Books>.Projection.Include("Copies.AccessionNo").Exclude("_id")).Sort(Builders<Books>.Sort.Descending("Copies.AccessionNo")).Limit(1).ToList()[0].ElementAt(0).Value)[0].AsBsonDocument.ElementAt(0).Value;
+                allDocs = ((books.books as IMongoCollection<Books>).Aggregate().Project(Builders<Books>.Projection.Include("Copies.AccessionNo").Exclude("_id")).Unwind("Copies").Sort(Builders<BsonDocument>.Sort.Descending("Copies.AccessionNo")).Limit(1).ToList()[0].ElementAt(0).Value)[0].AsString     ;
                 allDocs = int.Parse( allDocs.ToString()) + 1;
             }
-            catch (System.Exception e) { allDocs = null; }
+            catch (Exception ex)
+            {
+                allDocs = null;
+            }
             if (allDocs!=null )cp.AccessionNo = allDocs.ToString();
             return View("AddCopy",cp);
         }
