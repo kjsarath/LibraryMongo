@@ -34,6 +34,17 @@ namespace LibraryMongo.Controllers
         public ActionResult Add(string BookID)
         {
             Books b = new Books();
+            object bC = null;
+            try
+            {
+                bC = (books.books.Aggregate().Project(Builders<Books>.Projection.Include("Code").Exclude("_id")).Sort(Builders<BsonDocument>.Sort.Descending("Code")).Limit(1).ToList()[0].ElementAt(0).Value);
+                bC = int.Parse(bC.ToString()) + 1;
+            }
+            catch(Exception)
+            {
+                bC = null;
+            }
+            if (bC != null) b.Code = bC.ToString();
             return View(b);
         }
 
