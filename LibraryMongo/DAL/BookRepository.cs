@@ -90,8 +90,21 @@ namespace LibraryMongo.DAL
             }
             var filter = Builders<Books>.Filter.Eq("BookID",bookID);
             var update = Builders<Books>.Update.Push("Copies", copy);
-            books.FindOneAndUpdateAsync(filter, update);
+            var upsert = new FindOneAndUpdateOptions<Books, Books>()
+            {
+                IsUpsert = true
+            };
+            books.FindOneAndUpdateAsync(filter, update,upsert  );
             return copy;
+        }
+        public Copies getCopy(string copyID)
+        {
+            var cp =books.Find(Builders<Books>.Filter.Eq("Copies.CopyID", copyID)).Project(Builders<Books>.Projection.Include("Copies.$").Exclude("_id")).ToList()[0].ElementAt(0).Value.AsBsonArray.ElementAt(0).AsBsonDocument ;
+            Copies c = MongoDB.Bson.Serialization.BsonSerializer.Deserialize<Copies>(cp);
+            //if (cp!=null) return ((Copies)cp);
+            //else
+            //    return null;
+            return c;
         }
     }
 }

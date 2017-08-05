@@ -147,5 +147,32 @@ namespace LibraryMongo.Controllers
             }
             return RedirectToAction("Details", new { id = id });
         }
+
+        public ActionResult EditCopy(string id, string bookid)
+        {
+            Copies cp = books.getCopy(id);
+            ViewBag.BookID = bookid;
+            return View(cp);
+        }
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "SaveAsCopy")]
+        public ActionResult SaveAsCopy(string id,string bookid)
+        {
+            Copies cp = books.getCopy(id);
+            if (TryUpdateModel(cp))
+            {
+                try
+                {
+                    books.addCopy(bookid, cp);
+                    return RedirectToAction("Details", new { id = id });
+                }
+                catch (RetryLimitExceededException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                }
+            }
+            return RedirectToAction("Details", new { id = id });
+        }
     }
 }

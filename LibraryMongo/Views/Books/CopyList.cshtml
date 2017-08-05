@@ -22,7 +22,7 @@
                     grid.Column("SubCode", "SUB CODE"),
                     grid.Column("Status", "STATUS"),
                     grid.Column("IssueStatus", "ISSUE STATUS"),
-                    grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("EDIT", "EditCopy", "BookCopy", new { id = (int)item.CopyID }, null))
+                    grid.Column(columnName: "ACTIONS", format: (item) => Html.ActionLink("EDIT", "EditCopy", "Books", new { id = (int)item.CopyID }, null))
                 )
             )
         </div>

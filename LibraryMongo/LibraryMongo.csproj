@@ -338,6 +338,7 @@
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Books\CopyList.cshtml" />
     <Content Include="Views\Books\AddCopy.cshtml" />
+    <Content Include="Views\Books\EditCopy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
