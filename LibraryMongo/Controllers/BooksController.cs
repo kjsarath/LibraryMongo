@@ -164,15 +164,15 @@ namespace LibraryMongo.Controllers
             {
                 try
                 {
-                    books.addCopy(bookid, cp);
-                    return RedirectToAction("Details", new { id = id });
+                    books.UpdateCopy(bookid, cp);
+                    return RedirectToAction("Details", new { id = bookid });
                 }
                 catch (RetryLimitExceededException)
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
                 }
             }
-            return RedirectToAction("Details", new { id = id });
+            return RedirectToAction("Details", new { id = bookid });
         }
     }
 }

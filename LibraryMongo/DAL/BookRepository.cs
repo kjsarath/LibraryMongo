@@ -90,12 +90,21 @@ namespace LibraryMongo.DAL
             }
             var filter = Builders<Books>.Filter.Eq("BookID",bookID);
             var update = Builders<Books>.Update.Push("Copies", copy);
-            var upsert = new FindOneAndUpdateOptions<Books, Books>()
+            //var upsert = new FindOneAndUpdateOptions<Books, Books>()
+            var upsert = new UpdateOptions()
             {
                 IsUpsert = true
             };
-            books.FindOneAndUpdateAsync(filter, update,upsert  );
+            //books.FindOneAndUpdateAsync(filter, update,upsert  );
+            books.UpdateOne (filter, update, upsert);
             return copy;
+        }
+        public void UpdateCopy(string bookID, Copies copy)
+        {
+            var filter = Builders<Books>.Filter.Where(x => x.BookID == bookID && x.Copies.Any(i => i.CopyID  == copy.CopyID));
+            //var update = Builders<Books>.Update.Set(x => x.Copies[-1].Title, title);
+            var update = Builders<Books>.Update.Set(x => x.Copies[-1], copy);
+            var result = books.UpdateOneAsync(filter, update).Result;
         }
         public Copies getCopy(string copyID)
         {
