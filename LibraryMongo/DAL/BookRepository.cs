@@ -48,6 +48,10 @@ namespace LibraryMongo.DAL
             {
                 book.BookID = Guid.NewGuid().ToString();
             }
+            if (book.Copies == null)
+            {
+                book.Copies = new List<Copies> { };
+            }
             books.InsertOne(book);
             return book;
         }
