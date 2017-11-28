@@ -22,7 +22,8 @@
                                     </td>
                                     <td style="width:70%;vertical-align:central ">
                                         @*<input type="email" class="input-group input-group-lg form-control" id="inputEmail3" placeholder="Username">*@
-                                        @Html.TextBoxFor(m=>m.username,new { @class= "form-control", @placeholder = "Username", @type = "email" })
+                                        @*@Html.TextBoxFor(m=>m.username,new { @class= "form-control", @placeholder = "Username", @type = "email" })*@
+                                        @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Username"})
                                     </td>
                                 </tr>
                             </table>

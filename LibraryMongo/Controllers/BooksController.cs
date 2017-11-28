@@ -30,7 +30,31 @@ namespace LibraryMongo.Controllers
                 }
             }
             var bL = books.getAllBooks();
-            return View(bL);
+            if (bL!=null && bL.Count > 0)
+            {
+                return View(bL);
+            }
+            else
+            {
+                return RedirectToAction("AddFirst");
+            }
+        }
+
+        public ActionResult AddFirst()
+        {
+            Books b = new Books();
+            object bC = null;
+            try
+            {
+                bC = (books.books.Aggregate().Project(Builders<Books>.Projection.Include("Code").Exclude("_id")).Sort(Builders<BsonDocument>.Sort.Descending("Code")).Limit(1).ToList()[0].ElementAt(0).Value);
+                bC = int.Parse(bC.ToString()) + 1;
+            }
+            catch (Exception)
+            {
+                bC = null;
+            }
+            if (bC != null) b.Code = bC.ToString();
+            return View("Add");
         }
 
         [HttpPost ]
@@ -431,6 +455,13 @@ namespace LibraryMongo.Controllers
             {
 
             }
+        }
+
+        [HttpPost]
+        [MultipleButton(Name = "action", Argument = "BackToBook")]
+        public ActionResult BackToBook(string bookid)
+        {
+            return RedirectToAction("Details",new { id = bookid });
         }
     }
 }

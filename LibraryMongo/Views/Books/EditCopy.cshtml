@@ -16,6 +16,7 @@
                     <div class="panel-body ">
                         <div class="form-group" style="text-align: left">
                             <input type="submit" name="action:SaveAsCopy" value="Save" class="btn btn-success " />
+                            <input type="submit" name="action:BackToBook" value="Back To Book" class="btn btn-primary " />
                             <input type="submit" name="action:Back" value="Back To List" class="btn btn-info " />
                         </div>
                         <div style="font-family:Calibri ;font-size:12px">
@@ -44,6 +45,18 @@
                                         @Html.EditorFor(model => model.SubCode, new { htmlAttributes = new { @class = "TextBoxTDBG4 form-control" } })
                                         @Html.ValidationMessageFor(model => model.SubCode, "", new { @class = "text-danger" })
                                     </td>
+                                    @*<td style="width:100%">
+                                        <span class="col-md-2 col-xs-4 tdStyle2">Accession No.</span>
+                                        <span class="col-md-4 col-xs-8 TextBoxTDBG3">
+                                            @Html.EditorFor(model => model.AccessionNo, new { htmlAttributes = new { @class = "TextBoxTDBG4 form-control" } })
+                                            @Html.ValidationMessageFor(model => model.AccessionNo, "", new { @class = "text-danger" })
+                                        </span>
+                                        <span class="col-md-2 col-xs-4 tdStyle2">Book Sub-Code</span>
+                                        <span class="col-md-4 col-xs-8 TextBoxTDBG3">
+                                            @Html.EditorFor(model => model.SubCode, new { htmlAttributes = new { @class = "TextBoxTDBG4 form-control" } })
+                                            @Html.ValidationMessageFor(model => model.SubCode, "", new { @class = "text-danger" })
+                                        </span>
+                                    </td>*@
                                 </tr>
                                 <tr>
                                     <td class="tdStyle2" style="width:10%">Barcode</td>
